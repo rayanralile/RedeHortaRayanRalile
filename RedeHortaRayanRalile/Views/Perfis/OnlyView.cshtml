@@ -1,0 +1,54 @@
+﻿@model RedeHortaRayanRalile.Models.Perfis.PerfilOnlyViewViewModel
+
+@{
+    ViewData["Title"] = "Visualização de perfil";
+}
+
+<h1>Rede Social de Horta - Visualização de um perfil</h1>
+
+<div>
+    <h4>Perfil de @Html.DisplayFor(model => model.Nome).</h4>
+    <hr />
+    <dl class="row">
+        
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.UsuarioLogin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UsuarioLogin)
+        </dd>
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src='@Html.DisplayFor(model => model.Foto)' width=300 />
+        </dd>
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.Biografia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Biografia)
+        </dd>
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.TipoHorta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TipoHorta)
+        </dd>
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.Interesses)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Interesses)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="ListAll" asp-controller="Perfis">Retornar para a lista de perfis</a> | <a asp-action="Timeline" asp-controller="Post">Retornar para Linha do Tempo</a>
+</div>

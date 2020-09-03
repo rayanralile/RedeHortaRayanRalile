@@ -1,0 +1,47 @@
+﻿@model IEnumerable<RedeHortaRayanRalile.Models.Post.PostTimelineViewModel>
+@{
+    ViewData["Title"] = "Linha do tempo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Linha do tempo da rede social</h1>
+
+<ul class="list-group list-group-flush">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <div class="text-center">
+                <p>Criado por <a href="/perfis/onlyview/@item.PerfilId">@item.NomeAutor</a> no dia @item.DataCriacao.ToShortDateString()</p>
+                <h5 class="display-5">@item.Titulo</h5>
+                <p>@item.Descricao</p>
+
+                @switch (item.TipoMidia)
+                {
+                    case 0:
+                        <img src="@item.Multimedia" width="500" /><br />
+                        break;
+                    case 1:
+                        <video width="640" controls>
+                            <source src="@item.Multimedia" type="video/mp4">
+                            Seu navegador não suporta HTML5. Atualize-o para usar o serviço
+                        </video><br />
+                        break;
+                    case 2:
+                        <audio controls>
+                            <source src="@item.Multimedia" type="audio/mpeg">
+                            Seu navegador não suporta HTML5. Atualize-o para usar o serviço
+                        </audio><br />
+                        break;
+                    default:
+                        <br />
+                        break;
+                }
+            </div>
+        </li>
+    }
+</ul>
+<br/>
+<!--APGRR-->
+<div class="text-center">
+    <h5><a href="/post/index">Ir para meus posts</a></h5>
+</div>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<RedeHortaRayanRalile.Models.Perfis.PerfilListAllViewModel>
+
+@{
+    ViewData["Title"] = "Todos os perfis da Rede Social";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lista dos perfis</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioLogin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoHorta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Interesses)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioLogin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                <img src='@Html.DisplayFor(modelItem => item.Foto)' width=200 />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoHorta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Interesses)
+            </td>
+            <td>
+                @Html.ActionLink("Ver perfil", "OnlyView", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

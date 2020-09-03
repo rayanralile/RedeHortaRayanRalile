@@ -1,0 +1,61 @@
+﻿@model RedeHortaRayanRalile.Models.Perfis.PerfilEditViewModel
+
+@{
+    ViewData["Title"] = "Edite seu Perfil";
+}
+
+<h1>Editar seu perfil - Rede Social de Horta</h1>
+
+<h4>Perfil</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="/perfis/edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UsuarioLogin" />
+            <input type="hidden" asp-for="Foto" value="ToAdd" />
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foto" class="control-label"></label>
+                <input type="file" name="photo" accept="image/*" class="form-control" />
+                <span validation-for="TipoHorta" class="text-danger"></span>
+                <!-- Acima usei um validation aleatório que não é required, pois não
+        faz sentido obrigar o usuário na edição a trocar de foto....-->
+            </div>
+            <div class="form-group">
+                <label class="control-label">Obs: caso não faça upload de foto, será mantida a atual.</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoHorta" class="control-label"></label>
+                <input asp-for="TipoHorta" class="form-control" />
+                <span asp-validation-for="TipoHorta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Interesses" class="control-label"></label>
+                <input asp-for="Interesses" class="form-control" />
+                <span asp-validation-for="Interesses" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Biografia" class="control-label"></label>
+                <textarea class="form-control" asp-for="Biografia" placeholder="Por favor, fale um pouco sobre você (Opcional)" rows="8"></textarea>
+                <span asp-validation-for="Biografia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Retornar para a HomePage</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

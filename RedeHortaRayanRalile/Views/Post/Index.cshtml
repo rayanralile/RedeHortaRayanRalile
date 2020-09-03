@@ -1,0 +1,96 @@
+﻿@model IEnumerable<RedeHortaRayanRalile.Models.Post.PostIndexViewModel>
+
+@{
+    ViewData["Title"] = "Meus posts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Criar novo post</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form action="/post/create" enctype="multipart/form-data" method="post">
+            <div validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="DataCriacao" />
+            <div class="form-group">
+                <label for="Titulo" class="control-label">Título do post</label>
+                <input name="Titulo" class="form-control" />
+                <span validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Descricao" class="control-label">Conteúdo:</label>
+                <textarea class="form-control" name="Descricao" id="validationTextarea" placeholder="Digite seu post aqui :)" rows="8" data-val="true" data-val-length="Seu post não pode conter mais do que 3000 caracteres." data-val-length-max="3000" maxlength="3000" aria-describedby="Descricao-error" aria-invalid="false"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Multimedia" class="control-label">Imagem, Vídeo ou Foto (opcional)</label>
+                <input type="file" name="multimedia" accept=".jpeg, .jpg, .png, .gif, .bmp, .webp, .mp4, .mp3" class="form-control" />
+                <span validation-for="Multimedia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Postar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr />
+<h2>Seus Posts</h2>
+<ul class="list-group list-group-flush">
+    @foreach (var item in Model)
+    {
+    <li class="list-group-item">
+        <div class="text-center">
+            <h5 class="display-5">@item.Titulo</h5>
+            <p>@item.Descricao</p>
+
+            @switch (item.TipoMidia)
+            {
+                case 0:
+                    <img src="@item.Multimedia" width="500" /><br />
+                    break;
+                case 1:
+                    <video width="640" controls>
+                        <source src="@item.Multimedia" type="video/mp4">
+                        Seu navegador não suporta HTML5. Atualize-o para usar o serviço
+                    </video><br />
+                    break;
+                case 2:
+                    <audio controls>
+                        <source src="@item.Multimedia" type="audio/mpeg">
+                        Seu navegador não suporta HTML5. Atualize-o para usar o serviço
+                    </audio><br />
+                    break;
+                default:
+                    <br />
+                    break;
+            }
+        <h5 class="display-5">Post criado em @item.DataCriacao.ToShortDateString()</h5>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-@item.Id">
+                Excluir
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal-@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Exclusão de post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Você deseja excluir este Post?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <a class="btn btn-primary" href="/post/delete/@item.Id" role="button">Excluir</a>
+                        </div>
+                    </div>
+                </div>
+            </div><h4><a href="/post/edit/@item.Id">Editar post</a></h4><br />
+
+        </div>
+    </li>
+    }
+</ul>
