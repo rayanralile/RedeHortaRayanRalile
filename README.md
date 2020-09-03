@@ -1,4 +1,6 @@
 # RedeHortaRayanRalile
+https://rayan-ralile-hortabr.azurewebsites.net/
+
 Rede Social para cultivadores e entusiastas de hortas indoor (casa e apartamento) - Projeto de Bloco de graduação em Análise e Desenvolvimento de Sistemas pelo Instituto INFNET.
 ## Instrução para o Build e o Deploy do projeto - Visual Studio 2019
 ### Caso queira rodar localmente (banco de dados, blob do Azure rodando localmente simulado e API localhost
